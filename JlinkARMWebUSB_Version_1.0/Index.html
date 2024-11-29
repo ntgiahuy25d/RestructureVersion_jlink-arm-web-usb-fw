@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html style="font-family: Verdana; font-size: 12px"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Origin Trial Token, feature = WebUSB (For Chrome M57+), origin = https://webusb.github.io, expires = 2017-06-19 -->
+    <meta http-equiv="origin-trial" data-feature="WebUSB (For Chrome M57+)" data-expires="2017-06-19" content="Ag83MurQOa5N4SKRCqqtSlbycfe08s5LgUiqEI7J3jTk2NEIpRp7SLPz2i+EBDuXyf+AeRMdD6BI++kTSJmGzQEAAABReyJvcmlnaW4iOiJodHRwczovL3dlYnVzYi5naXRodWIuaW86NDQzIiwiZmVhdHVyZSI6IldlYlVTQjIiLCJleHBpcnkiOjE0OTc4OTM2OTV9">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>J-Link WebUSB Test</title>
+    <style>
+    .section-header {
+      background-color: #EEEEEE;
+      font-size: 14px;
+      font-weight: bold;
+      color: black;
+      width: 100%;
+      margin-bottom: 5px;
+      margin-top: 10px;
+    }
+    .box-output {
+      height:200px;
+      width:100%;
+      border-style: solid;
+      border-width: thin;
+      overflow:auto;
+      overflow-anchor: auto;
+      font-family: Verdana, Helvetica, sans-serif;
+      font-size: 11px;
+      border: 2px inset #000000;
+    }
+    </style>
+   </head>
+  <body>
+    <div class="container">
+      <img alt="renesas-logo" src="Renesas_Electronics_logo.svg" width="200px">
+      <h1>Renesas J-Link Web USB firmware for RA</h1>
+      <p><b>How to execute the test?</b><br/>
+        1. Update the test sequence in "./jlinkarmwebusbfw_test.js".<br/>
+        2. Open Web browser's console.<br/>
+        3. Click "Run Test" button.<br/>
+        4. Observe the result on the console.<br/>
+      </p>
+      <!-- <script src="./seggerbulk.js"></script>
+      <script src="./jlinkcom.js"></script>
+      <script src="./jlinkarmwebusbfw.js"></script>
+      <script src="./jlinkarmwebusbfw_test.js"></script> -->
+      <!-- <script src="./test.js"></script> -->
+      <button id="ConnectBtn" onclick="ExecuteConnectBtn()">Connect</button>
+      <button id="ResetBtn" onclick="ExecuteResetBtn()">Reset</button>
+      <button id="HaltBtn" onclick="ExecuteHaltBtn()">Halt</button>
+      <button id="UnHaltBtn" onclick="ExecuteUnHaltBtn()">UnHalt</button>
+      <button id="DisConnectBtn" onclick="ExecuteDisConnectBtn()">DisConnect</button>
+      <br>
+    </div>
+    <script>
+      // async function ExecuteConnectBtn() { 
+      //      const performOperations =  Module.cwrap('ConnectController');
+      //       performOperations();
+      // }
+      function ExecuteConnectBtn() {
+        const ConnectFn =  Module.cwrap('ConnectController');
+        document.getElementById("ConnectBtn").disabled = true;
+        ConnectFn().then((resolve) => {
+          document.getElementById("ConnectBtn").disabled = false;
+        })
+          .catch((e) => {
+            document.getElementById("ConnectBtn").disabled = false;
+          })
+      }
+      function ExecuteDisConnectBtn() {
+        const DisConnectFn =  Module.cwrap('DisConnectController');
+        document.getElementById("DisConnectBtn").disabled = true;
+        DisConnectFn().then((resolve) => {
+          document.getElementById("DisConnectBtn").disabled = false;
+        })
+          .catch((e) => {
+            document.getElementById("DisConnectBtn").disabled = false;
+          })
+      }
+      function ExecuteResetBtn() {
+        const ResetFn =  Module.cwrap('ResetController');
+        document.getElementById("ResetBtn").disabled = true;
+        ResetFn().then((resolve) => {
+          document.getElementById("ResetBtn").disabled = false;
+        })
+          .catch((e) => {
+            document.getElementById("ResetBtn").disabled = false;
+          })
+      }
+      function ExecuteHaltBtn() {
+        const HaltFn =  Module.cwrap('HaltController');
+        document.getElementById("HaltBtn").disabled = true;
+        HaltFn().then((resolve) => {
+          document.getElementById("HaltBtn").disabled = false;
+        })
+          .catch((e) => {
+            document.getElementById("HaltBtn").disabled = false;
+          })
+      }
+      function ExecuteUnHaltBtn() {
+        const UnHaltFn =  Module.cwrap('UnHaltController');
+        document.getElementById("UnHaltBtn").disabled = true;
+        UnHaltFn().then((resolve) => {
+          document.getElementById("UnHaltBtn").disabled = false;
+        })
+        .catch((e) => {
+            document.getElementById("UnHaltBtn").disabled = false;
+        })
+      }
+      
+      </script>
+    <script src="output.js"></script>
+</body>
+</html>
